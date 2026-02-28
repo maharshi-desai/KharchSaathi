@@ -102,7 +102,7 @@ User → Frontend → Processing Logic → Output
 
 ## Architecture Diagram  
 
-(Add system architecture diagram image here)
+![kharch saathi](./architecture.png)
 
 ---
 
@@ -215,9 +215,6 @@ KharchSaathi does not use external APIs.
 
 All processing happens within the browser.
 
-## API Endpoints List  
-Not applicable.
-
 ## API Testing Screenshots  
 (Add screenshots if backend version is implemented)
 
@@ -276,7 +273,6 @@ Deliverables:
 
 Live Demo Link: (Add link here)  
 Demo Video Link: (Add link here)  
-GitHub Repository: (Add link here)
 
 ---
 
