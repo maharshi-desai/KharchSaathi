@@ -1,12 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kharch Saathi — Because every rupee deserves attention</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <script src="script.js"></script>
+    <!-- Landing Page View -->
+    <section class="landing-view active" id="view-landing">
+        <div class="landing-background">
+            <div class="mesh-blob blob-1"></div>
+            <div class="mesh-blob blob-2"></div>
+            <div class="mesh-blob blob-3"></div>
+        </div>
+
+        <div class="landing-container">
+            <div class="landing-top">
+                <div class="hero-section">
+                    <div class="trust-badge">
+                        <span class="dot"></span> TRUSTED BY 10,000+ USERS
+                    </div>
+                    <h1 class="hero-title">Every rupee<br><span class="hero-highlight">deserves<br>attention.</span>
+                    </h1>
+                    <p class="hero-subtitle">KharchSaathi is your private financial companion. We analyze your bank
+                        statements in volatile memory—no storage, no tracking, just <span class="highlight-text">pure
+                            insights.</span></p>
+
+                    <div class="hero-pills">
+                        <span class="pill"><span class="dot green"></span> Zero-Knowledge</span>
+                        <span class="pill"><span class="dot blue"></span> Real-time Analysis</span>
+                        <span class="pill"><span class="dot purple"></span> AI Powered</span>
+                    </div>
+                </div>
+
+                <div class="vault-section">
+                    <div class="vault-card">
+                        <div class="vault-avatar">K</div>
+                        <h2>Welcome Back</h2>
+                        <p>Access your private financial vault</p>
+
+                        <form id="unlock-form" class="vault-form">
+                            <div class="input-group">
+                                <label for="full-name">FULL NAME</label>
+                                <div class="input-wrapper">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="input-icon">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <input type="text" id="full-name" placeholder="Rahul Sharma" required>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="email-address">EMAIL ADDRESS</label>
+                                <div class="input-wrapper">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="input-icon">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <input type="email" id="email-address" placeholder="rahul@example.com" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-unlock">Unlock Your Vault &rarr;</button>
+                        </form>
+
+                        <div class="encryption-notice">
+                            END-TO-END ENCRYPTED SESSION
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-grid-landing">
+                <div class="feature-card">
+                    <div class="feature-icon icon-blue">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="18" y="3" width="4" height="18"></rect>
+                            <rect x="10" y="8" width="4" height="13"></rect>
+                            <rect x="2" y="13" width="4" height="8"></rect>
+                        </svg>
+                    </div>
+                    <h3>Smart Categorization</h3>
+                    <p>Our algorithm automatically sorts your UPI, Food, and Shopping transactions into clean, readable
+                        buckets
+                        with <strong>99% accuracy.</strong></p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-purple">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                            </path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3>Anomaly Detection</h3>
+                    <p>Identify statistical outliers and high-frequency UPI alerts that might indicate fraud or <a
+                            href="#" style="color:var(--accent-blue); text-decoration:underline;">hidden subscription
+                            leaks.</a></p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Wealth Strategies</h3>
+                    <p>Get personalized recommendations to cut costs and extend your financial runway based on
+                        <strong>real historical data.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-section">
+                <h2>Simple. Secure. Private.</h2>
+                <p class="workflow-subtext">Three steps to financial clarity without ever compromising your privacy.</p>
+
+                <div class="workflow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Export CSV</h4>
+                        <p>Download your bank statement from your banking portal in CSV format.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Upload & Analyze</h4>
+                        <p>Drop your file into KharchSaathi. We analyze it in real-time in your browser's memory.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Get Insights</h4>
+                        <p>Instantly see your health score, runway, and anomalies. No data is ever saved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard View (Initially Hidden) -->
+    <div id="dashboard-view" class="hidden-fade">
+        <header class="app-header">
+            <div class="header-container">
+                <h1 class="logo">Kharch Saathi</h1>
+                <p class="tagline">Because every rupee deserves attention.</p>
+            </div>
+            <nav class="secondary-nav">
+                <div class="nav-container">
+                    <div class="nav-indicator" id="nav-indicator"></div>
+                    <button class="nav-tab active" data-target="view-overview">Overview</button>
+                    <button class="nav-tab" data-target="view-transactions">Transactions</button>
+                    <button class="nav-tab" data-target="view-risk">Risk Assessment</button>
+                    <button class="nav-tab" data-target="view-merchants">Merchant Insights</button>
+                </div>
+            </nav>
+        </header>
+
+        <main class="app-main">
+            <!-- Overview View -->
+            <section class="view-section active" id="view-overview">
+                <section class="upload-zone" id="upload-zone">
+                    <div class="upload-content">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <h2>Drag and drop your statement</h2>
+                        <p>Or click to upload a CSV file</p>
+                        <input type="file" id="csv-upload" accept=".csv" hidden>
+                    </div>
+                </section>
+
+                <section class="summary-grid" id="summary-section">
+                    <div class="card summary-card">
+                        <h3>Total Spending</h3>
+                        <div class="value" id="val-total">₹0</div>
+                    </div>
+                    <div class="card summary-card">
+                        <h3>Transactions</h3>
+                        <div class="value" id="val-txns">0</div>
+                    </div>
+                    <div class="card summary-card" id="risk-score-card" style="cursor: pointer;">
+                        <h3>Risk Score</h3>
+                        <div class="value" id="val-risk">
+                            <span class="risk-indicator safe">0</span>
+                        </div>
+                    </div>
+                    <div class="card summary-card">
+                        <h3>Alerts</h3>
+                        <div class="value" id="val-alerts">0</div>
+                    </div>
+                </section>
+
+                <section class="dashboard-body">
+                    <div class="chart-container card">
+                        <h3>Spending Over Time</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="spending-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="anomaly-feed card">
+                        <h3>Anomaly Feed</h3>
+                        <div class="anomaly-list" id="anomaly-list">
+                            <!-- Anomalies will be populated here -->
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Transactions View -->
+            <section class="view-section hidden" id="view-transactions">
+                <div class="dashboard-body">
+                    <div class="chart-container card" style="flex: 1;">
+                        <h3>Spending by Category</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="category-donut-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card" style="flex: 1;">
+                        <h3>Category Breakdown</h3>
+                        <div class="category-grid" id="category-grid">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transactions-table-container card">
+                    <div class="table-header"
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3>All Transactions</h3>
+                        <div class="table-filters" style="display: flex; gap: 0.5rem; align-items: center;">
+                            <input type="text" id="txn-search" class="filter-input" placeholder="Search merchants...">
+                            <button class="filter-btn" data-filter="7days">Last 7 Days</button>
+                            <button class="filter-btn" data-filter="high">High Value</button>
+                            <button class="filter-btn active" data-filter="all">All</button>
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="txn-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Merchant</th>
+                                    <th>Category</th>
+                                    <th style="text-align: right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="txn-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="txn-empty-state"
+                        style="display: none; text-align: center; padding: 2rem; color: var(--text-muted);">
+                        No transactions found.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Risk Assessment View -->
+            <section class="view-section hidden" id="view-risk">
+                <div class="card risk-card">
+                    <div class="risk-gauge-container">
+                        <canvas id="risk-gauge-canvas" width="300" height="150"></canvas>
+                        <div class="risk-gauge-labels">
+                            <span class="label-low">LOW RISK</span>
+                            <span class="label-high">HIGH RISK</span>
+                        </div>
+                        <div class="risk-gauge-score" id="detailed-risk-score">0</div>
+                    </div>
+                    <div class="risk-description">
+                        <p>This risk score assesses your spending patterns for potential issues and is dynamically
+                            updated.
+                            This score is a composite based on transaction volatility, unusual merchant activity, and
+                            spending velocity, calculated locally.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Merchant Insights View -->
+            <section class="view-section hidden" id="view-merchants">
+                <div class="card">
+                    <h3 style="margin-bottom: 1.5rem;">Merchant Wall of Fame & Shame</h3>
+                    <div class="merchant-list" id="merchant-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>All data processed locally. Your financial privacy is protected.</p>
+        </footer>
+
+    </div>
+
+    <script src="js/parser.js"></script>
+    <script src="js/analyser.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
