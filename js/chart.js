@@ -1,8 +1,3 @@
-/**
- * chart.js
- * Encapsulates Chart.js implementation for the Spending Over Time chart.
- */
-
 class SpendingChart {
     constructor(canvasId) {
         this.canvasId = canvasId;
