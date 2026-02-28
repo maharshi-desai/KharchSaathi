@@ -1,189 +1,327 @@
-# KharchSaathi
+# KharchSaathi  
 ### Because every rupee deserves attention.
 
-KharchSaathi is a lightweight, web-based Personal Finance Anomaly Detection tool built using *HTML, CSS, and JavaScript*.
+---
 
-It transforms raw bank transaction CSV files into:
+## Project Title  
+KharchSaathi – Personal Finance Anomaly Detector
 
-Visual spending insights  
-Intelligent anomaly alerts  
-Simple, explainable risk scoring  
-
-The goal is to help individuals detect unusual financial behavior such as high-value transactions, new merchants, and sudden spending spikes — before they turn into financial problems.
+## One-line Project Description  
+A lightweight, client-side web application that detects unusual financial behavior from bank transaction CSV files using explainable rule-based anomaly detection.
 
 ---
 
-## Problem Statement
+# 1. Problem Statement
 
-With the rapid growth of digital banking, UPI, and online payments, individuals generate large transaction histories. However:
+## Problem Title  
+Lack of Proactive Financial Anomaly Detection for Individuals
 
-•⁠  ⁠Users rarely receive proactive alerts about unusual spending  
-•⁠  ⁠Fraudulent or high-value transactions often go unnoticed  
-•⁠  ⁠Banks provide only basic summaries  
-•⁠  ⁠Spending awareness remains reactive instead of proactive  
+## Problem Description  
+With the rise of digital banking, UPI, and online transactions, individuals generate large volumes of financial data. However:
 
-KharchSaathi bridges this gap by providing a simple, explainable anomaly detection system that works directly on bank CSV statements.
+- Users rarely receive alerts for unusual spending.
+- Fraudulent or abnormal transactions often go unnoticed.
+- Banks provide only basic summaries.
+- Financial awareness remains reactive instead of proactive.
 
----
+There is a need for a simple, user-centric system that analyzes transaction history and highlights unusual financial behavior.
 
-## Key Features
+## Target Users  
+- Students managing monthly expenses  
+- Working professionals tracking spending  
+- Individuals using digital payments frequently  
+- Anyone seeking better financial awareness  
 
-###  1. CSV Upload
-Users can upload their bank transaction history in CSV format directly in the browser.
-
----
-
-### 2. Automatic Transaction Parsing
-Using *PapaParse*, the system extracts:
-
-•⁠  ⁠Date  
-•⁠  ⁠Description  
-•⁠  ⁠Amount  
-
-All processing happens on the client side — no backend required.
+## Existing Gaps  
+- No lightweight personal anomaly detection tools  
+- Limited explainable alerts  
+- No behavior-based spending analysis in basic banking apps  
 
 ---
 
-### 3. Smart Categorization
-Transactions are automatically categorized using keyword-based matching:
+# 2. Problem Understanding & Approach
 
-•⁠  ⁠*Food* → Swiggy, Zomato  
-•⁠  ⁠*Shopping* → Amazon, Flipkart  
-•⁠  ⁠*Travel* → Uber, Ola  
-•⁠  ⁠*Others* → Default category  
+## Root Cause Analysis  
+- Users do not manually analyze transaction history.
+- No baseline comparison is performed on spending behavior.
+- Alerts are not personalized.
+- Lack of accessible financial analysis tools.
 
-This allows better analysis of spending patterns.
-
----
-
-### 4. Anomaly Detection Engine
-
-KharchSaathi applies simple, explainable rules to detect unusual activity:
-
-🔴 *High-Value Transactions*  
-Flags transactions significantly higher than normal spending.
-
-🟠 *New Merchant Alerts*  
-Detects merchants appearing for the first time.
-
-🟡 *Spending Trend Analysis*  
-Tracks spending over time using visual line charts.
-
-Each anomaly is clearly explained — no black-box alerts.
+## Solution Strategy  
+- Parse transaction CSV files directly in browser.
+- Normalize transaction data.
+- Categorize spending automatically.
+- Build spending baseline (average behavior).
+- Apply rule-based anomaly detection.
+- Provide explainable risk scoring.
+- Visualize results for better understanding.
 
 ---
 
-### 5. Risk Score System
+# 3. Proposed Solution
 
-Every flagged transaction contributes to a simple risk score to indicate financial irregularity.
+## Solution Overview  
+KharchSaathi is a browser-based financial anomaly detection tool that processes CSV transaction data and highlights unusual financial patterns.
 
-The score helps users quickly understand whether their recent spending behavior is normal or unusual.
+## Core Idea  
+Transform raw transaction data into actionable financial insights using simple, explainable rules and visual dashboards.
 
----
+## Key Features  
 
-### 6. Visual Dashboard
-
-The dashboard provides:
-
-•⁠  ⁠Total spending summary  
-•⁠  ⁠Spending trend line chart  
-•⁠  ⁠Alert section highlighting anomalies  
-•⁠  ⁠Clear explanation for each flagged transaction  
-
-All displayed in a clean and user-friendly interface.
-
----
-
-## Tech Stack
-
-### Frontend
-•⁠  ⁠HTML  
-•⁠  ⁠CSS  
-•⁠  ⁠JavaScript  
-
-### Libraries (CDN-based)
-•⁠  ⁠*Chart.js* – Data visualization  
-•⁠  ⁠*PapaParse* – CSV parsing  
-
-No backend required.  
-Fully client-side implementation.
+ CSV Upload (Client-side)  
+ Automatic Transaction Parsing  
+ Smart Categorization (Food, Travel, Shopping, etc.)  
+ High-Value Transaction Detection  
+ New Merchant Detection  
+ Category Spending Spike Detection  
+ Risk Score Calculation  
+ Visual Spending Dashboard  
 
 ---
 
-## 📁 Project Structure
+# 4. System Architecture
 
+## High-Level Flow  
 
-kharchsaathi/
-│
-├── index.html
-├── style.css
-├── script.js
-└── README.md
+User → Frontend (Browser) → CSV Parser → Data Processing Engine → Anomaly Detection Logic → Visualization Dashboard
 
+Since KharchSaathi is fully client-side:
 
----
+User → Frontend → Processing Logic → Output
 
-## How It Works
+## Architecture Description  
 
-1.⁠ ⁠User uploads a CSV file  
-2.⁠ ⁠PapaParse converts CSV into a JavaScript array  
-3.⁠ ⁠Transactions are processed  
-4.⁠ ⁠Spending totals and categories are calculated  
-5.⁠ ⁠Anomaly detection rules are applied:
-   - High transaction amount  
-   - New merchant detection  
-6.⁠ ⁠Results are displayed visually on the dashboard  
+- User uploads CSV file.
+- PapaParse converts CSV into JavaScript objects.
+- Transactions are normalized.
+- Categorization logic assigns categories.
+- Spending baseline is calculated.
+- Anomaly rules are applied.
+- Risk score is computed.
+- Results are displayed using Chart.js.
 
-Everything runs locally in the browser.
+## Architecture Diagram  
 
----
-
-## Example CSV Format
-
-
-Date,Description,Amount
-01-01-2026,Swiggy,-350
-02-01-2026,Amazon,-6000
-03-01-2026,Uber,-500
-04-01-2026,Salary,30000
-
+(Add system architecture diagram image here)
 
 ---
 
-## Demo Flow
+# 5. Database Design
 
-1.⁠ ⁠Upload CSV file  
-2.⁠ ⁠View total spending summary  
-3.⁠ ⁠See spending trend chart  
-4.⁠ ⁠View flagged anomalies  
-5.⁠ ⁠Understand risk score explanation  
+KharchSaathi currently operates fully client-side and does not require a database.
 
----
+Transactions are stored in memory during runtime.
 
-## Why This Project Matters
+## ER Diagram  
 
-•⁠  ⁠Encourages financial awareness  
-•⁠  ⁠Helps detect suspicious or unusual transactions  
-•⁠  ⁠Promotes proactive budgeting  
-•⁠  ⁠Provides explainable anomaly alerts  
-•⁠  ⁠Demonstrates practical data processing using JavaScript  
+(Add ER diagram image here)
 
-KharchSaathi proves that meaningful financial insights can be generated using simple, transparent logic — without complex systems.
+### ER Diagram Description  
 
----
+If extended with backend storage:
 
-## Future Improvements
+Entities:
+- User
+- Transaction
+- Category
+- Anomaly
 
-•⁠  ⁠Support for PDF bank statements  
-•⁠  ⁠Advanced statistical anomaly detection  
-•⁠  ⁠Category-based budget recommendations  
-•⁠  ⁠Improved merchant pattern recognition  
-•⁠  ⁠Mobile-responsive design enhancements  
+Relationships:
+- User has many Transactions
+- Transaction belongs to one Category
+- Transaction may generate one or more Anomalies
 
 ---
 
-## Built With
+# 6. Dataset Selected
 
-Developed as a personal finance awareness tool focused on simplicity, clarity, and usability.
+## Dataset Name  
+User-uploaded Bank Transaction CSV
+
+## Source  
+User-provided CSV file
+
+## Data Type  
+Structured tabular data
+
+Columns:
+- Date
+- Description
+- Amount
+
+## Selection Reason  
+- Real-world financial data
+- Structured and easy to parse
+- Relevant for anomaly detection
+
+## Preprocessing Steps  
+- CSV parsing using PapaParse
+- Data normalization
+- Conversion of amount to numeric type
+- Lowercasing descriptions
+- Removing invalid rows
+
+---
+
+# 7. Model Selected
+
+## Model Name  
+Rule-Based Anomaly Detection
+
+## Selection Reasoning  
+- Lightweight and interpretable
+- No backend required
+- Easily explainable to users
+- Suitable for hackathon timeline
+
+## Alternatives Considered  
+- Z-score statistical detection
+- Isolation Forest
+- Supervised classification models
+
+## Evaluation Metrics  
+- Correct identification of abnormal transactions
+- False positive reduction
+- User interpretability
+
+---
+
+# 8. Technology Stack
+
+## Frontend  
+- HTML  
+- CSS  
+- JavaScript  
+
+## Backend  
+Not required (Fully client-side implementation)
+
+## ML/AI  
+Rule-based anomaly detection logic
+
+## Database  
+None (In-memory processing)
+
+## Deployment  
+Can be hosted using:
+- Netlify
+- Vercel
+
+---
+
+# 9. API Documentation & Testing
+
+KharchSaathi does not use external APIs.
+
+All processing happens within the browser.
+
+## API Endpoints List  
+Not applicable.
+
+## API Testing Screenshots  
+(Add screenshots if backend version is implemented)
+
+---
+
+# 10. Module-wise Development & Deliverables
+
+## Checkpoint 1: Research & Planning  
+Deliverables:
+- Problem understanding
+- Feature planning
+- System design outline
+
+## Checkpoint 2: Backend Development  
+Deliverables:
+- Not applicable (client-side implementation)
+
+## Checkpoint 3: Frontend Development  
+Deliverables:
+- CSV upload interface
+- Dashboard UI
+- Chart integration
+
+## Checkpoint 4: Model Development  
+Deliverables:
+- Spending baseline logic
+- Anomaly detection rules
+- Risk scoring function
+
+## Checkpoint 5: Model Integration  
+Deliverables:
+- Linking parsing, detection, and UI
+- Displaying anomaly alerts
+
+## Checkpoint 6: Deployment  
+Deliverables:
+- Live hosting setup
+- Demo-ready version
+
+---
+
+# 11. End-to-End Workflow
+
+1. User uploads CSV file.
+2. CSV parsed using PapaParse.
+3. Transactions converted into JavaScript objects.
+4. Categorization applied.
+5. Spending baseline calculated.
+6. Anomaly detection rules executed.
+7. Risk score generated.
+8. Visual dashboard updated.
+
+---
+
+# 12. Demo & Video
+
+Live Demo Link: (Add link here)  
+Demo Video Link: (Add link here)  
+GitHub Repository: (Add link here)
+
+---
+
+# 13. Hackathon Deliverables Summary
+
+- Fully working client-side anomaly detection system
+- Visual spending dashboard
+- Risk scoring mechanism
+- Explainable alerts
+- Real-time CSV analysis
+
+---
+
+# 14. Future Scope & Scalability
+
+## Short-Term  
+- PDF statement support  
+- Advanced statistical detection (z-score)  
+- Improved categorization  
+
+## Long-Term  
+- Backend storage  
+- User authentication  
+- ML-based anomaly detection  
+- Real-time bank API integration  
+- Mobile application version  
+
+---
+
+# 15. Known Limitations
+
+- Only supports CSV format currently  
+- Rule-based detection may produce false positives  
+- No persistent storage  
+- No real-time bank integration  
+
+---
+
+# 16. Impact
+
+KharchSaathi promotes financial awareness by:
+
+- Encouraging proactive spending monitoring  
+- Detecting unusual transactions early  
+- Providing explainable financial insights  
+- Making personal finance analysis accessible to everyone  
 
 ---
