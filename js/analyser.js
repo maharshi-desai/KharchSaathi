@@ -1,3 +1,9 @@
+/**
+ * analyser.js
+ * Analyzes transaction arrays to compute running stats, detect anomalies,
+ * and calculate a risk score.
+ */
+
 class Analyser {
     /**
      * Performs statistical analysis on an array of transactions.
