@@ -271,8 +271,8 @@ Deliverables:
 
 # 12. Demo & Video
 
-Live Demo Link: (Add link here)  
-Demo Video Link: (Add link here)  
+Live Demo Link and Ppt Link: https://drive.google.com/drive/folders/1qQq9Ppy0OcbLELe_yglyweJMO6IkVqcW?usp=sharing
+Deployed Website Link: https://kharch-saathi.vercel.app/
 
 ---
 
