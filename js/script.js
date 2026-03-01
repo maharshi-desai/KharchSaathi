@@ -1,22 +1,22 @@
-// Dummy Data to initialize the dashboard with a "populated" look
-const DUMMY_CSV = `Date,Merchant,Amount,Category
-2023-10-01,Starbucks,350,Food
-2023-10-02,Amazon,1200,Shopping
-2023-10-03,Uber,450,Transport
-2023-10-04,Apple Store,95000,Electronics
-2023-10-05,Groceries,3200,Food
-2023-10-06,Netflix,649,Entertainment
-2023-10-08,Swiggy,850,Food
-2023-10-10,Flight Tickets,12500,Travel
-2023-10-12,Pharmacy,600,Health
-2023-10-15,Zomato,1100,Food`;
+/**
+ * script.js
+ * Main controller to tie together parsing, analyzing, charting, and UI updates.
+ */
 
+// No dummy data, start empty
 let appState = 'landing';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 0. Setup Navigation & Landing state
     setupNavigation();
     setupLandingTransition();
+
+    // Check for existing session
+    const savedSession = localStorage.getItem('kharchSaathiUser');
+    if (savedSession) {
+        // User was already logged in
+        restoreSession(savedSession);
+    }
 
     // 1. Initialize Charts
     const chart = new SpendingChart('spending-chart');
@@ -26,8 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Store raw transactions globally for filtering
     window.rawTransactions = [];
 
-    // 2. Load Dummy Data initially
-    processCSVString(DUMMY_CSV);
+    // 2. Load Saved Data
+    const savedData = localStorage.getItem('kharchSaathiData');
+    if (savedData) {
+        processCSVString(savedData);
+        // Hide main upload zone and show nav button since we have data
+        const mainUploadZone = document.getElementById('upload-zone');
+        const navUploadZone = document.getElementById('nav-upload-zone');
+        if (mainUploadZone) mainUploadZone.style.display = 'none';
+        if (navUploadZone) navUploadZone.classList.remove('hidden');
+    }
 
     // 3. Setup Drag and Drop
     setupDragAndDrop();
@@ -49,42 +57,87 @@ function setupLandingTransition() {
         const fullName = document.getElementById('full-name').value;
         if (fullName.trim() === '') return;
 
-        // Optionally, we could store the name to personalize the dashboard
-        const avatarStr = fullName.trim().charAt(0).toUpperCase();
-        // Transition visually
-        const landingView = document.getElementById('view-landing');
-        const dashboardView = document.getElementById('dashboard-view');
+        // Save session
+        localStorage.setItem('kharchSaathiUser', fullName.trim());
 
-        if (landingView && dashboardView) {
-            appState = 'dashboard';
+        // Perform visual transition
+        transitionToDashboard(fullName.trim());
+    });
+}
 
+function restoreSession(fullName) {
+    // Bypass the landing page silently
+    const landingView = document.getElementById('view-landing');
+    if (landingView) {
+        landingView.style.display = 'none';
+    }
+    transitionToDashboard(fullName, true);
+}
+
+function transitionToDashboard(fullName, isRestore = false) {
+    const firstName = fullName.split(' ')[0];
+
+    // Update Dashboard Greeting
+    const greetingEl = document.getElementById('user-greeting');
+    if (greetingEl) {
+        greetingEl.innerHTML = `Welcome back, <strong style="color: var(--text-primary);">${firstName}</strong> 👋 <span style="margin: 0 0.5rem; color: var(--border-color);">|</span> <span style="color: var(--text-muted);">Because every rupee deserves attention.</span>`;
+    }
+
+    const landingView = document.getElementById('view-landing');
+    const dashboardView = document.getElementById('dashboard-view');
+    const btnLogout = document.getElementById('btn-logout');
+
+    if (btnLogout) btnLogout.classList.remove('hidden');
+
+    if (landingView && dashboardView) {
+        appState = 'dashboard';
+
+        if (!isRestore) {
             // Add fade-out class to landing
             landingView.classList.add('fade-out');
+        }
 
-            // Show dashboard with transition
-            dashboardView.style.display = 'block';
-            // Force reflow for transition to take effect
-            void dashboardView.offsetWidth;
+        // Show dashboard with transition
+        dashboardView.style.display = 'block';
+        // Force reflow for transition to take effect
+        void dashboardView.offsetWidth;
 
-            dashboardView.classList.remove('hidden-fade');
+        dashboardView.classList.remove('hidden-fade');
 
-            // Update indicator positions now that elements are visible
-            const activeTab = document.querySelector('.nav-tab.active');
-            if (activeTab) {
-                const indicator = document.getElementById('nav-indicator');
-                if (indicator) {
-                    indicator.style.width = `${activeTab.offsetWidth}px`;
-                    indicator.style.left = `${activeTab.offsetLeft}px`;
-                }
+        // Update indicator positions now that elements are visible
+        const activeTab = document.querySelector('.nav-tab.active');
+        if (activeTab) {
+            const indicator = document.getElementById('nav-indicator');
+            if (indicator) {
+                indicator.style.width = `${activeTab.offsetWidth}px`;
+                indicator.style.left = `${activeTab.offsetLeft}px`;
             }
+        }
 
+        if (!isRestore) {
             // Remove landing from DOM after animation completes (600ms)
             setTimeout(() => {
                 landingView.style.display = 'none';
             }, 600);
         }
-    });
+    }
 }
+
+// Setup Logout Button
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            const confirmLogout = confirm("Are you sure you want to sign out and lock your vault?");
+            if (confirmLogout) {
+                // Clear session and data
+                localStorage.removeItem('kharchSaathiUser');
+                localStorage.removeItem('kharchSaathiData');
+                window.location.reload(); // Quickest way to clean state and return to landing
+            }
+        });
+    }
+});
 
 // View Navigation Logic
 function setupNavigation() {
@@ -429,42 +482,50 @@ function updateMerchantsView(analysis) {
 
 // Drag & Drop Handling
 function setupDragAndDrop() {
-    const dropZone = document.getElementById('upload-zone');
-    const fileInput = document.getElementById('csv-upload');
+    setupZone('upload-zone', 'csv-upload');
+    setupZone('nav-upload-zone', 'nav-csv-upload');
 
-    // Make the entire box clickable
-    dropZone.addEventListener('click', () => fileInput.click());
+    function setupZone(zoneId, inputId) {
+        const dropZone = document.getElementById(zoneId);
+        const fileInput = document.getElementById(inputId);
+        if (!dropZone || !fileInput) return;
 
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            handleFile(e.target.files[0]);
+        // Make the entire box clickable
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+                // Reset value so same file can be selected again
+                e.target.value = '';
+            }
+        });
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
         }
-    });
 
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, preventDefaults, false);
-    });
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
+        });
 
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
     }
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        if (files.length > 0) {
-            handleFile(files[0]);
-        }
-    });
 
     function handleFile(file) {
         if (!file.name.endsWith('.csv')) {
@@ -475,6 +536,16 @@ function setupDragAndDrop() {
         const reader = new FileReader();
         reader.onload = (e) => {
             const content = e.target.result;
+
+            // Toggle Upload Zones upon actual user upload
+            const mainUploadZone = document.getElementById('upload-zone');
+            const navUploadZone = document.getElementById('nav-upload-zone');
+            if (mainUploadZone) mainUploadZone.style.display = 'none';
+            if (navUploadZone) navUploadZone.classList.remove('hidden');
+
+            // Save to local storage for persistence across refreshes
+            localStorage.setItem('kharchSaathiData', content);
+
             processCSVString(content);
         };
         reader.readAsText(file);

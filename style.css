@@ -136,6 +136,58 @@ h6 {
     font-weight: 500;
 }
 
+/* Nav Upload Button */
+.nav-upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-upload-btn:hover,
+.nav-upload-btn.dragover {
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+    background-color: rgba(50, 173, 230, 0.05);
+}
+
+.nav-upload-btn.hidden {
+    display: none;
+}
+
+/* Nav Logout Button */
+.nav-logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--status-red);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-logout-btn:hover {
+    background-color: #fff0f0;
+    border-color: rgba(255, 59, 48, 0.3);
+}
+
+.nav-logout-btn.hidden {
+    display: none;
+}
+
 /* Main Layout */
 .app-main {
     max-width: var(--content-max-width);
@@ -163,7 +215,10 @@ h6 {
 
 /* Cards & Base Component Styles */
 .card {
-    background-color: var(--bg-card);
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-soft);
     padding: 1.5rem;
@@ -573,7 +628,7 @@ h6 {
     padding: 2rem;
     color: var(--text-muted);
     font-size: 0.8125rem;
-    margin-top: auto;
+    margin-top: 4rem;
 }
 
 /* =========================================================================
@@ -602,6 +657,8 @@ h6 {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    position: relative;
+    z-index: 1;
 }
 
 #dashboard-view.hidden-fade {
@@ -620,6 +677,10 @@ h6 {
     overflow: hidden;
     z-index: 0;
     pointer-events: none;
+}
+
+.dashboard-bg {
+    position: fixed;
 }
 
 .mesh-blob {

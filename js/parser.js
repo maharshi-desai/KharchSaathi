@@ -1,3 +1,8 @@
+/**
+ * parser.js
+ * Handles parsing of CSV files/strings into JSON arrays.
+ */
+
 class CSVParser {
     /**
      * Parses a CSV string into an array of objects.
